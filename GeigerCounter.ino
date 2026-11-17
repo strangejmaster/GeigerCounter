@@ -37,6 +37,7 @@
   // Displays
   void displayGeiger(Adafruit_SSD1306&, long, long, String);
   void displayRandom(Adafruit_SSD1306&, long, long, String, long);
+  void displaySample(Adafruit_SSD1306&, long, long, String, long);
 
   // If data has stopped being recieved raise a warning after 5 seconds
   bool staleFlag{false};

@@ -1,0 +1,4 @@
+#ifndef SCREEN_MANAGER_HPP
+#def SCREEN_MANAGER_HPP
+
+#endif
