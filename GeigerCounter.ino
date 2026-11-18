@@ -27,6 +27,8 @@ const unsigned long displayDelay{100};
 bool staleFlag{ false };
 unsigned long staleTimer{ 0 };
 
+// Create the display object
+ScreenManager screen(displayDelay);
 
 void setup() {
   // Serial.begin(9600);
@@ -36,8 +38,7 @@ void setup() {
 
   button.begin();
 
-  // Start up the display
-  ScreenManager screen(displayDelay);
+  
   bool screenInitialized{ screen.begin() };
 
   while (!screenInitialized) {
@@ -55,19 +56,18 @@ void loop() {
   unsigned long time{ millis() };
 
   if (button.pressed()) {
-    displayMode++;
+    mode++;
 
-    if (displayMode >= maxDisplayModes) {
-      displayMode = 0;
+    if (mode >= maxModes) {
+      mode = 0;
     }
   }
 
-  screen.setTextColor(SSD1306_WHITE);
   screen.setTextSize(2);
   screen.setCursor(0, 0);
 
   // Check for stale input
-  if (input == "") {
+  // if (input == "") {
     if (!staleFlag) {
       staleFlag = true;
       staleTimer = time;
@@ -84,24 +84,24 @@ void loop() {
         screen.setCursor(0, 0);
         screen.print("STALE DATA\n");
         screen.print("Stale for ");
-        screen.print(duration / 1000);
-        screen.print('s');
-        screen.display();
+        screen.print(String(duration / 1000));
+        screen.print("s");
+        screen.display(time);
         delay(500);
         return;
       }
     }
-  } else {
-    staleFlag = false;
-    screen.clear();
-  }
+  // } else {
+  //   staleFlag = false;
+  //   screen.clear();
+  // }
 
-  if (input != "") {
-    oldCps = cps;
-    cps = getCsvValue(input, 1).toInt();
-    cpm = getCsvValue(input, 3).toInt();
-    mode = getCsvValue(input, 6);
-  }
+  // if (input != "") {
+  //   oldCps = cps;
+  //   cps = getCsvValue(input, 1).toInt();
+  //   cpm = getCsvValue(input, 3).toInt();
+  //   mode = getCsvValue(input, 6);
+  // }
 
   // if (displayWritable(time, lastDisplayTime, displayDelay)) {
   //   display.clearDisplay();
