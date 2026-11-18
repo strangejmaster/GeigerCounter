@@ -1,7 +1,7 @@
 #ifndef GEIGER_MODE_HPP
 #define GEIGER_MODE_HPP
 
-#include <Adafruit_SSD1306.h>
+#include "ScreenManager.hpp"
 
 class GeigerMode {
   private:
@@ -9,10 +9,10 @@ class GeigerMode {
     bool signalRising(bool currentClick, bool oldClick);
 
   protected:
-    Adafruit_SSD1306& screen;
+    ScreenManager& screen;
   
   public:
-    GeigerMode(Adafruit_SSD1306& screen);
+    GeigerMode(ScreenManager& screen) : screen(screen) {}
 
     // The tick function should be called every loop that a mode is active
     //  click - Whether or not the Geiger Counter's tube has fired
