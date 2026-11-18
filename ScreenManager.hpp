@@ -6,7 +6,6 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <String>
 
 
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
@@ -32,16 +31,11 @@ class ScreenManager {
     // Last time the screen was written to
     unsigned long lastDisplayTime{0};
 
-    Adafruit_SSD1306 display;
+    Adafruit_SSD1306 screen;
 
-    // Internally track that the screen was written to
-    void write(unsigned long currentTime) {
-      lastDisplayTime = currentTime;
-    };
-    
   public:
-    ScreenManager(unsigned long displayDelay) : display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET), displayDelay(displayDelay) {
-      display.setTextColor(SSD1306_WHITE);
+    ScreenManager(unsigned long displayDelay) : screen(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET), displayDelay(displayDelay) {
+      screen.setTextColor(SSD1306_WHITE);
       setTextSize(2);
     }
     bool begin();
@@ -57,6 +51,6 @@ class ScreenManager {
     bool displayable(unsigned long currentTime);
     // Specially controls the screen so that it's not refreshed too often when display() calls are made frequenly (more often than display delay)
     void display(unsigned long currentTime);
-}
+};
 
 #endif
