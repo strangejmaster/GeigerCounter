@@ -8,7 +8,7 @@ class GeigerMode {
     ScreenManager& screen;
 
   public:
-    GeigerMode(ScreenManager& screen) : screen(screen) {};
+    GeigerMode(ScreenManager& screen) : screen(screen) {}
 
     // The tick function should be called every loop that a mode is active
     //  clicks - The number of impulses detected since the last loop
