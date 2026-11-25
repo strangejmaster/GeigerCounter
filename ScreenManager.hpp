@@ -49,7 +49,8 @@ class ScreenManager {
 
     // Returns whether the display can be written to (useful to prevent over calling it)
     bool displayable(unsigned long currentTime);
-    // Specially controls the screen so that it's not refreshed too often when display() calls are made frequenly (more often than display delay)
+
+    // Specially controls the screen so that it's not refreshed too often when display() calls are made frequently (more often than display delay)
     void display(unsigned long currentTime);
 };
 
