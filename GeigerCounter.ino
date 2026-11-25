@@ -9,8 +9,16 @@
 const int buttonPin{ 4 };
 Button button(buttonPin);
 
-// Pin for reading a single ionization event from the Geiger Counter
-const int pulsePin{ A0 };
+// Digital pin for reading a single ionization event from the Geiger Counter
+const int pulsePin{ 8 };
+
+// The pulses since the last tick of the mode (how many detection events have accrued)
+volatile int pulses{0};
+
+// A very basic interrupt function to count pulses
+void incrementPulse() {
+  pulses++;
+}
 
 // An extra signal LED on the Geiger Counter
 const int ledPin{ 7 };
@@ -38,7 +46,6 @@ void setup() {
 
   button.begin();
 
-  
   bool screenInitialized{ screen.begin() };
 
   while (!screenInitialized) {
@@ -47,6 +54,9 @@ void setup() {
   }
 
   screen.playIntro();
+
+  pinMode(pulsePin, INPUT); // Get digital input on the pulse pin. The Geiger Counter sends HIGH signals when triggered and LOW when not
+  attachInterrupt(digitalPinToInterrupt(pulsePin), incrementPulse, RISING); // Watch for the rising edges
 
   // Reset the staleTimer so it doesn't begin on startup
   staleTimer = millis();
