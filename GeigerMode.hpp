@@ -8,13 +8,14 @@ class GeigerMode {
     ScreenManager& screen;
 
   public:
-    GeigerMode(ScreenManager& screen) : screen(screen) {}
+    GeigerMode(ScreenManager& screen) : screen(screen) {};
 
     // The tick function should be called every loop that a mode is active
     //  clicks - The number of impulses detected since the last loop
-    //  time - The time in MICROseconds
+    //  time - The time in milliseconds
     virtual void tick(int clicks, unsigned long time) = 0;
 };
+
 
 // // Detect if a click should exist (impulses are sent by the Attiny2313 on the board and last 100 uS)
 // A 3 MICROsecond debounce to wait before the next pulse is detected
