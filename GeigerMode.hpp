@@ -16,6 +16,16 @@ class GeigerMode {
     virtual void tick(int clicks, unsigned long time) = 0;
 };
 
+class TestMode : public GeigerMode {
+  public:
+    int a{0};
+
+  TestMode(ScreenManager& screen) : GeigerMode(screen) {};
+
+  void tick(int clicks, unsigned long time) override {
+    a++;
+  };
+};
 
 // // Detect if a click should exist (impulses are sent by the Attiny2313 on the board and last 100 uS)
 // A 3 MICROsecond debounce to wait before the next pulse is detected
