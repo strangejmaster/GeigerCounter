@@ -100,8 +100,7 @@ void loop() {
       if (duration > 5000) {
         // Serial.print("Stale Data trigger, current time: ");
         // Serial.println(time);
-        screen.clear();
-        screen.setCursor(0, 0);
+        screen.reset();
         screen.print("STALE DATA\n");
         screen.print("Stale for ");
         screen.print(String(duration / 1000));
