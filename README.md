@@ -9,8 +9,8 @@ The codebase also contains simple code to create a **true** random generator,
 which triggers based on the detection of cosmic rays or nuclear decays.
 
 ## Setup
-To set up the code, simply compile and run in Android Studio. 
-Ensure the Geiger Counter's data header pins are soldered so that the SCK, SDA I2C pins, and GND can be connected to the Arduino, as noted in the code.
+To set up the code, simply compile and run using Arduino IDE. 
+Ensure the Geiger Counter's data header pins are soldered so that the SCK, SDA, I2C pins, and GND can be connected to the Arduino, as noted in the code.
 The screen should also be connected to allow for image rendering.
 A button can also be added to allow for switching between survey mode and random number generation!
 
