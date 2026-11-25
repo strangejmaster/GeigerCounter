@@ -44,6 +44,7 @@ class ScreenManager {
     void setTextSize(int fontPointSize);
     void print(String text);
     void clear();
+    void reset(); // Clears and resets cursor position and font size
 
     void playIntro();
 

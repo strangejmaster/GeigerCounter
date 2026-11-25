@@ -24,6 +24,12 @@ void ScreenManager::clear() {
   screen.clearDisplay();
 }
 
+void ScreenManager::reset() {
+  clear();
+  setCursor(0, 0);
+  setTextSize(2);
+}
+
 void ScreenManager::setCursor(int x, int y) {
   screen.setCursor(x, y);
 }
