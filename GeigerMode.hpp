@@ -4,20 +4,43 @@
 #include "ScreenManager.hpp"
 
 class GeigerMode {
-  private:
-    bool oldClick;
-    bool signalRising(bool currentClick, bool oldClick);
-
   protected:
     ScreenManager& screen;
-  
+
   public:
     GeigerMode(ScreenManager& screen) : screen(screen) {}
 
     // The tick function should be called every loop that a mode is active
-    //  click - Whether or not the Geiger Counter's tube has fired
-    virtual void tick(bool click) = 0;
+    //  clicks - The number of impulses detected since the last loop
+    //  time - The time in MICROseconds
+    virtual void tick(int clicks, unsigned long time) = 0;
 };
+
+// // Detect if a click should exist (impulses are sent by the Attiny2313 on the board and last 100 uS)
+// A 3 MICROsecond debounce to wait before the next pulse is detected
+    // const int debounce{3};
+
+    // // The analog signal threshold (from 0 to 100%) for a signal to be considered HIGH
+    // const double clickThreshold{40};
+
+    // // The last time the impulse signal rose
+    // unsigned long lastClickRise{0};
+
+    // // Time in microseconds that an impulse signal (tube detection event) from the Attiny microcontroller lasts
+    // // This is effectively a one hundred microsecond hold to wait for the signal to clear
+    // const unsigned long impulseDuration{100};
+
+    // // Time in microseconds to debounce after the impulseDuration has passed (allows the signal to restabalize to LOW)
+    // const unsigned long impulseDebounce{5};
+//     bool clickDetected(unsigned long time, int click) {
+//       bool active{click > clickThreshold};
+
+//       if (active && ((time - lastClickRise) > (impulseDuration + impulseDebounce))) {
+//         lastClickRise = time;
+//         return true;
+//       }
+//       return false;
+//     }
 
 // void displayGeiger(Adafruit_SSD1306& screen, long cps, long cpm, String mode) {
 //   screen.print(F("CPM: "));
