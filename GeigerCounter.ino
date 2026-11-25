@@ -2,6 +2,7 @@
 // #include <SoftwareSerial.h>
 #include "Button.h"
 #include "ScreenManager.hpp"
+#include "GeigerMode.hpp"
 
 // RX on 18, TX on 19
 // SoftwareSerial GeigerSerial = SoftwareSerial(18, 19);
@@ -25,8 +26,10 @@ const int ledPin{ 7 };
 
 // ----- Modes -----
 // These modes change the functionality of the Geiger Counter
-int mode{ 0 };
+int activeMode{ 0 };
 const int maxModes{ 2 };  // Number of display modes
+bool modeSwitched{false}; // A flag to only switch the mode once for each held button press
+GeigerMode* modes[] {(new TestMode(screen))};
 
 // Minimum time in milliseconds before the screen can change
 const unsigned long displayDelay{100}; 
@@ -59,22 +62,29 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(pulsePin), incrementPulse, RISING); // Watch for the rising edges
 
   // Reset the staleTimer so it doesn't begin on startup
-  staleTimer = millis();
+  staleTimer = millis();  
 }
 
 void loop() {
   unsigned long time{ millis() };
 
-  if (button.pressed()) {
-    mode++;
+  if (button.pressed_for(2000)) {
+    if (!modeSwitched) {
+      activeMode++;
 
-    if (mode >= maxModes) {
-      mode = 0;
+      if (activeMode >= maxModes) {
+        activeMode = 0;
+      }
+
+      modeSwitched = true;
     }
+  } else {
+    // Clear the modeSwitched flag once the button has been released/has not been pressed for >= 2 seconds
+    modeSwitched = false;
   }
 
-  screen.setTextSize(2);
-  screen.setCursor(0, 0);
+  modes[activeMode]->tick(pulses, time);
+
 
   // Check for stale input
   // if (input == "") {
