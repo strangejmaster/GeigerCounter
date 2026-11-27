@@ -66,6 +66,8 @@ void setup() {
 
   screen.playIntro();
 
+  modes[activeMode]->setup(0);
+
   // Reset the staleTimer so it doesn't begin on startup
   staleTimer = millis();  
 }
@@ -80,6 +82,8 @@ void loop() {
       if (activeMode >= maxModes) {
         activeMode = 0;
       }
+
+      modes[activeMode]->setup(time);
 
       modeSwitched = true;
     }
