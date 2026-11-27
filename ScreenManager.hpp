@@ -34,7 +34,7 @@ class ScreenManager {
     Adafruit_SSD1306 screen;
 
   public:
-    ScreenManager(unsigned long displayDelay) : screen(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET), displayDelay(displayDelay) {
+    ScreenManager(unsigned long displayDelay) : displayDelay(displayDelay), screen(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET) {
       screen.setTextColor(SSD1306_WHITE);
       setTextSize(2);
     }
