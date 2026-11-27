@@ -12,16 +12,14 @@ bool ScreenManager::begin() {
   return started;
 }
 
-bool ScreenManager::displayable(unsigned long currentTime) {
-  bool writable{ ! ( (currentTime - lastDisplayTime) < displayDelay ) };
+bool ScreenManager::displayable(unsigned long time) {
+  bool writable{ ! ( (time - lastDisplayTime) < displayDelay ) };
   return writable;
 }
 
-void ScreenManager::display(unsigned long currentTime) {
-  if (displayable(currentTime)) {
-    screen.display();
-    lastDisplayTime = currentTime;
-  }
+void ScreenManager::display(unsigned long time) {
+  screen.display();
+  lastDisplayTime = time;
 }
 
 void ScreenManager::clear() {

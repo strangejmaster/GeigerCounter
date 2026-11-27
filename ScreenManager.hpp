@@ -48,11 +48,11 @@ class ScreenManager {
 
     void playIntro();
 
-    // Returns whether the display can be written to (useful to prevent over calling it)
-    bool displayable(unsigned long currentTime);
+    // Returns whether the display can be written to given the specified delay between writes (useful to prevent updating it too often)
+    bool displayable(unsigned long time);
 
-    // Specially controls the screen so that it's not refreshed too often when display() calls are made frequently (more often than display delay)
-    void display(unsigned long currentTime);
+    // Directly write to the display
+    void display(unsigned long time);
 };
 
 #endif

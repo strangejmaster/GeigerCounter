@@ -41,7 +41,7 @@ void TestMode::tick(int clicks, unsigned long time) {
 
     screen.print(F("Mode:"));
     screen.print(counterMode);
-
+    
     screen.display(time);
 
     // debugSerial.print("Recieved line: ");
