@@ -1,11 +1,7 @@
-// #include <Wire.h>
-// #include <SoftwareSerial.h>
 #include "Button.h"
 #include "ScreenManager.hpp"
 #include "GeigerMode.hpp"
 
-// RX on 18, TX on 19
-// SoftwareSerial GeigerSerial = SoftwareSerial(18, 19);
 // Button Controls
 // Time in milliseconds that the button must be held for for the following events to occur
 // Multiple events are not triggered even if the time is above the minimum heldTime for more than one event
@@ -99,9 +95,6 @@ void loop() {
     // Clear the modeSwitched flag once the button has been released/has not been pressed for >= 2 seconds
     modeSwitched = false;
   }
-
-  // Serial.print("Active mode: ");
-  // Serial.println(activeMode);
   
   if (modes[activeMode] != nullptr) {
     bool primaryAction{false};
