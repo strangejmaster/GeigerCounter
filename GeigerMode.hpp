@@ -97,17 +97,6 @@ class TestMode : public GeigerMode {
 //       return false;
 //     }
 
-// void displayGeiger(Adafruit_SSD1306& screen, long cps, long cpm, String mode) {
-//   screen.print(F("CPM: "));
-//   screen.println(cpm);
-//   screen.print(F("CPS: "));
-//   screen.println(cps);
-
-//   screen.println();
-//   screen.print(F("Mode:"));
-//   screen.println(mode);
-//   screen.display();
-// }
 
 // void displayRandom(Adafruit_SSD1306& screen, long cps, int rand, int randStore, long oldCps) {
 //   screen.print(F("Pick: "));
@@ -141,48 +130,5 @@ class TestMode : public GeigerMode {
 
 
 
-// // Could go in GeigerTestMode
-
-// // Serial.print("Recieved line: ");
-//   // Serial.println(input);
-//   // Serial.println("\nPARSE DATA:");
-//   // Serial.print("\tLine: ");
-//   // Serial.println(input);
-//   // Serial.print("\tcps: ");
-//   // Serial.println(cps);
-//   // Serial.print("\tcpm: ");
-//   // Serial.println(cpm);
-//   // Serial.print("\tmode: ");
-//   // Serial.println(mode);
-
-// // Serial1 is of class HardwareSerial
-//  // Get FTDI data
-//   String input{""};
-//   if (Serial1.available() > 0) {
-//     input = Serial1.readStringUntil('\n');
-//   }
-// String getCsvValue(String, int);
-// String mode{""};
-// String getCsvValue(String input, int index) {
-//   int valueIndex{0};
-//   String result{""};
-
-//   for (int i{0}; i < input.length(); i++) {
-//     char currentChar{input.charAt(i)};
-
-//     // Basic state machine, if character is ',' go to the next value index, if the character isn't ','
-//     // and the valueIndex is the desired index simply add that character to the result
-//     if (currentChar == ',') {
-//       valueIndex++;
-//       continue;
-//     }
-
-//     if (valueIndex == index) {
-//       result += currentChar;
-//     }
-//   }
-
-//   return result;
-// }
 
 #endif
