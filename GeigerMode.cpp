@@ -1,5 +1,11 @@
 #include "GeigerMode.hpp"
 
+void TestMode::setup(unsigned long time) {
+  screen.reset();
+  screen.print("Awaiting\nData...");
+  screen.display(time)
+}
+
 void TestMode::tick(int clicks, unsigned long time) {
   // Get FTDI data
   String input{""};

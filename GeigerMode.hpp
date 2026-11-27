@@ -11,6 +11,9 @@ class GeigerMode {
   public:
     GeigerMode(ScreenManager& screen, Stream& debugSerial) : screen(screen), debugSerial(debugSerial) {}
 
+    // Setup - Guaranteed to be called once each time a GeigerMode is activated, useful for initial graphics or other information
+    virtual void setup(unsigned long time) = 0;
+
     // The tick function should be called every loop that a mode is active
     //  clicks - The number of impulses detected since the last loop
     //  time - The time in milliseconds
@@ -68,6 +71,8 @@ class TestMode : public GeigerMode {
 
   public:
     TestMode(ScreenManager& screen, Stream& debugSerial, HardwareSerial& counterSerial) : GeigerMode(screen, debugSerial), counterSerial(counterSerial) {};
+    
+    void setup(unsigned long time);
     void tick(int clicks, unsigned long time) override;
 };
 
