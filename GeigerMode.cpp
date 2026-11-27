@@ -14,7 +14,7 @@ void TestMode::tick(int clicks, unsigned long time, bool primaryAction, bool sec
   if (bufferAvailable > 0) {
     // debugSerial.print("A: ");
     // debugSerial.println(counterSerial.available());
-    if (time > (lastBufferCheck + baudCheckPeriod)) {
+    if (time - lastBufferCheck > baudCheckPeriod)) {
       if (lastBufferAvailable == bufferAvailable) {
         input = counterSerial.readStringUntil('\n');
       }
@@ -67,7 +67,7 @@ void RandomMode::setup(unsigned long time) {
 
 void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) {
   // TODO - IMPORTANT: Convert all of the time comparisons to use subtraction so they can can continue to function during the ~40-day time overflow
-  if (time > (lastPickTime + minimumPickDelay)) {
+  if (time - lastPickTime > minimumPickDelay)) {
     if (clicks > 0) {
       pick = String(pool);
 
