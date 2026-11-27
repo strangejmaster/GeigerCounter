@@ -99,28 +99,28 @@ void loop() {
 
   // Check for stale input
   // if (input == "") {
-    if (!staleFlag) {
-      staleFlag = true;
-      staleTimer = time;
-      // Serial.print("staleFlag Timer Set: ");
-      // Serial.println(staleTimer);
-    } else if (staleFlag) {
-      unsigned long duration = time - staleTimer;
+  // if (!staleFlag) {
+  //   staleFlag = true;
+  //   staleTimer = time;
+  //   // Serial.print("staleFlag Timer Set: ");
+  //   // Serial.println(staleTimer);
+  // } else if (staleFlag) {
+  //   unsigned long duration = time - staleTimer;
 
-      // If data is stale, stop any more execution
-      if (duration > 5000) {
-        // Serial.print("Stale Data trigger, current time: ");
-        // Serial.println(time);
-        screen.reset();
-        screen.print("STALE DATA\n");
-        screen.print("Stale for ");
-        screen.print(String(duration / 1000));
-        screen.print("s");
-        screen.display(time);
-        delay(500);
-        return;
-      }
-    }
+  //   // If data is stale, stop any more execution
+  //   if (duration > 5000) {
+  //     // Serial.print("Stale Data trigger, current time: ");
+  //     // Serial.println(time);
+  //     screen.reset();
+  //     screen.print("STALE DATA\n");
+  //     screen.print("Stale for ");
+  //     screen.print(String(duration / 1000));
+  //     screen.print("s");
+  //     screen.display(time);
+  //     delay(500);
+  //     return;
+  //   }
+  // }
   // } else {
   //   staleFlag = false;
   //   screen.clear();
