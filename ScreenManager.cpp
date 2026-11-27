@@ -5,6 +5,10 @@
 bool ScreenManager::begin() {
   bool started{screen.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)};
 
+  if (started) {
+    reset();
+  }
+
   return started;
 }
 
@@ -41,7 +45,8 @@ void ScreenManager::print(String text) {
 }
 
 void ScreenManager::playIntro() {
-  screen.clearDisplay();
+  clear();
+
   int targetRadius{ sqrt(sq(SCREEN_WIDTH) + sq(SCREEN_HEIGHT)) / 2 };
   for (int radius{0}; radius < targetRadius; radius += 1) {
     screen.drawCircle(screen.width() / 2, screen.height() / 2, radius, SSD1306_WHITE);
@@ -49,17 +54,18 @@ void ScreenManager::playIntro() {
     delay(2);
   }
   delay(50);
-  screen.clearDisplay();
+  
+  reset();
 
-  screen.setTextSize(2);
-  screen.setCursor(0, 0);
   const String text = F("Strange\nComputing");
   for (int i{0}; i < text.length(); i++) {
-    screen.print(text.charAt(i));
+    print(String(text.charAt(i)));
     screen.display();
     delay(25);
   }
   delay(1000);
-  screen.clearDisplay();
+
+  reset();
+  
   screen.display();
 }
