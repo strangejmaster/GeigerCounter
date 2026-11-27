@@ -13,7 +13,7 @@ bool ScreenManager::begin() {
 }
 
 bool ScreenManager::displayable(unsigned long time) {
-  bool writable{ ! ( (time - lastDisplayTime) < displayDelay ) };
+  bool writable{ ! ( (time - lastDisplayTime) > displayDelay ) };
   return writable;
 }
 

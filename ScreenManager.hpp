@@ -26,7 +26,7 @@ class ScreenManager {
     const int SCREEN_ADDRESS{0x3c}; //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
     // The amount of time in milliseconds before the display can be updated (on a large scale, not an actual hardware limit)
-    unsigned long displayDelay;
+    unsigned long displayDelay{0};
     
     // Last time the screen was written to
     unsigned long lastDisplayTime{0};
