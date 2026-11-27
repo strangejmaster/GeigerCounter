@@ -116,7 +116,11 @@ void loop() {
     
     pulses = 0;
   } else {
-    // Serial.println("Nullptr!!!");
+    if (screen.displayable(time)) {
+      screen.reset();
+      screen.print("E!:\nMode 404");
+      screen.display(time);
+    }
   }
 
   lastHeldTime = button.held_time();
