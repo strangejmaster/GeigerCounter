@@ -17,7 +17,7 @@ class GeigerMode {
     // The tick function should be called every loop that a mode is active
     //  clicks - The number of impulses detected since the last loop
     //  time - The time in milliseconds
-    virtual void tick(int clicks, unsigned long time) = 0;
+    virtual void tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) = 0;
 };
 
 class TestMode : public GeigerMode {
@@ -73,7 +73,7 @@ class TestMode : public GeigerMode {
     TestMode(ScreenManager& screen, Stream& debugSerial, HardwareSerial& counterSerial) : GeigerMode(screen, debugSerial), counterSerial(counterSerial) {};
     
     void setup(unsigned long time);
-    void tick(int clicks, unsigned long time) override;
+    void tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) override;
 };
 
 class RandomMode : public GeigerMode {
@@ -95,7 +95,7 @@ class RandomMode : public GeigerMode {
     RandomMode(ScreenManager& screen, Stream& debugSerial) : GeigerMode(screen, debugSerial) {};
     
     void setup(unsigned long time);
-    void tick(int clicks, unsigned long time);
+    void tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) override;
 };
 
 // // Detect if a click should exist (impulses are sent by the Attiny2313 on the board and last 100 uS)

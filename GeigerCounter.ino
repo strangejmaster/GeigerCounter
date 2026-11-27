@@ -96,7 +96,8 @@ void loop() {
   // Serial.println(activeMode);
   
   if (modes[activeMode] != nullptr) {
-    modes[activeMode]->tick(pulses, time);
+    // TODO: Add a way to trigger the secondaryAction (possibly a short hold of the button)
+    modes[activeMode]->tick(pulses, time, button.released(), false);
 
     pulses = 0;
   } else {

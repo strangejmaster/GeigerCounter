@@ -6,7 +6,7 @@ void TestMode::setup(unsigned long time) {
   screen.display(time);
 }
 
-void TestMode::tick(int clicks, unsigned long time) {
+void TestMode::tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) {
   // Get FTDI data
   String input{""};
 
@@ -65,7 +65,7 @@ void RandomMode::setup(unsigned long time) {
   screen.display(time);
 }
 
-void RandomMode::tick(int clicks, unsigned long time) {
+void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) {
   // TODO - IMPORTANT: Convert all of the time comparisons to use subtraction so they can can continue to function during the ~40-day time overflow
   if (time > (lastPickTime + minimumPickDelay)) {
     if (clicks > 0) {
