@@ -125,37 +125,5 @@ class RandomMode : public GeigerMode {
 //     }
 
 
-// void displayRandom(Adafruit_SSD1306& screen, long cps, int rand, int randStore, long oldCps) {
-//   screen.print(F("Pick: "));
-//   screen.println(randStore);
-//   // screen.println();
-//   screen.print(F("CPS: "));
-//   screen.println(cps);
-
-//   screen.println();
-//   screen.print(F("Pool: "));
-//   screen.println(rand);
-//   screen.display();
-// }
-
-
-
-// int randomCounter{0};
-// int randomCounterStore{0};
-// unsigned long randomCounterHoldTime{2000}; // How to keep values displayed on the random counter
-// unsigned long randomCounterSetTime{0}; // What time the random counter was last set
-// long oldCps{0};
-// long cps{0};
-// long cpm{0};
-// // Displays
-// void displayGeiger(Adafruit_SSD1306&, long, long, String);
-// void displayRandom(Adafruit_SSD1306&, long, int, int, long);
-// // void displaySample(Adafruit_SSD1306&, long, long, Strin/g, long);
-
-
-
-
-
-
 
 #endif
