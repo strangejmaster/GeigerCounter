@@ -12,8 +12,6 @@ const int buttonPin{ 4 };
 Button button(buttonPin);
 unsigned long lastHeldTime{0}; // How long the button had been held for, since the last loop
 
-
-
 // Digital pin for reading a single ionization event from the Geiger Counter
 const int pulsePin{ 8 };
 
@@ -47,7 +45,7 @@ unsigned long staleTimer{ 0 };
 ScreenManager screen(displayDelay);
 
 void setup() {
-  // Serial.begin(9600);
+  Serial.begin(9600);
   Serial1.begin(9600);
   // ADD THIS LINE IN FOR DEBUGGING
   // delay(1000);
@@ -111,7 +109,6 @@ void loop() {
       primaryAction = true;
     }
 
-    // TODO: Add a way to trigger the secondaryAction (possibly a short hold of the button)
     modes[activeMode]->tick(pulses, time, primaryAction, secondaryAction);
     
     pulses = 0;
