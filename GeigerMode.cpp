@@ -3,7 +3,7 @@
 void TestMode::setup(unsigned long time) {
   screen.reset();
   screen.print("Awaiting\nData...");
-  screen.display(time)
+  screen.display(time);
 }
 
 void TestMode::tick(int clicks, unsigned long time) {
