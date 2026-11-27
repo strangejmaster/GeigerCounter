@@ -29,7 +29,8 @@ const int ledPin{ 7 };
 int activeMode{ 0 };
 const int maxModes{ 2 };  // Number of display modes
 bool modeSwitched{false}; // A flag to only switch the mode once for each held button press
-GeigerMode* modes[] {(new TestMode(screen))};
+
+GeigerMode* modes[maxModes] = {}; // Initialize the array of modes with nullptrs
 
 // Minimum time in milliseconds before the screen can change
 const unsigned long displayDelay{100}; 
@@ -56,10 +57,14 @@ void setup() {
     Serial.println("Screen failed to initialize");
   }
 
-  screen.playIntro();
-
   pinMode(pulsePin, INPUT); // Get digital input on the pulse pin. The Geiger Counter sends HIGH signals when triggered and LOW when not
   attachInterrupt(digitalPinToInterrupt(pulsePin), incrementPulse, RISING); // Watch for the rising edges
+
+  // Initialize all of the modes
+  modes[0] = new TestMode(screen, Serial, Serial1);
+  modes[1] = new TestMode(screen, Serial, Serial1);
+
+  screen.playIntro();
 
   // Reset the staleTimer so it doesn't begin on startup
   staleTimer = millis();  
@@ -83,8 +88,14 @@ void loop() {
     modeSwitched = false;
   }
 
-  modes[activeMode]->tick(pulses, time);
-
+  // Serial.print("Active mode: ");
+  // Serial.println(activeMode);
+  
+  if (modes[activeMode] != nullptr) {
+    modes[activeMode]->tick(pulses, time);
+  } else {
+    // Serial.println("Nullptr!!!");
+  }
 
   // Check for stale input
   // if (input == "") {
