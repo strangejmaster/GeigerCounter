@@ -81,15 +81,21 @@ class RandomMode : public GeigerMode {
     // The value that is continuously updated. One pick is drawn from the pool as decided by the Geiger Counter
     int pool{0};
 
-    String pick{"None"};
-
     // The highest value allowed, inclusive
     int upperBound{9};
 
+    String pick{"None"};
+
+    String (*formatPick)(int pick) = [](int pick) -> String { return String(pick); };
+    
     unsigned long lastPickTime{0};
 
     // Minimum time in milliseconds between each number picked
     const unsigned int minimumPickDelay{750};
+
+    // Different modes for the RandomMode
+    int state{0};
+    int maxStates{3};
 
   public: 
     RandomMode(ScreenManager& screen, Stream& debugSerial) : GeigerMode(screen, debugSerial) {};

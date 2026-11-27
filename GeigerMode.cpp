@@ -58,7 +58,6 @@ void TestMode::tick(int clicks, unsigned long time, bool primaryAction, bool sec
   }
 }
 
-
 void RandomMode::setup(unsigned long time) {
   screen.reset();
   screen.print("Loading\nRandom");
@@ -66,9 +65,28 @@ void RandomMode::setup(unsigned long time) {
 }
 
 void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool secondaryAction) {
+  if (primaryAction) {
+    state++;
+
+    if (state >= maxStates) {
+      state = 0;
+    }
+
+    if (state == 0) {
+      upperBound = 9;
+      formatPick = [](int pick) -> String { return String(pick); };
+    } else if (state == 1) {
+      upperBound = 20;
+      formatPick = [](int pick) -> String { return String(pick); };
+    } else if (state == 2) {
+      upperBound = 26;
+      formatPick = [](int pick) -> String { return String((char) (65 + pick)); };
+    }
+  }
+
   if (time - lastPickTime > minimumPickDelay) {
     if (clicks > 0) {
-      pick = String(pool);
+      pick = formatPick(pool);
 
       lastPickTime = time;
     }
@@ -79,9 +97,13 @@ void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool s
     screen.print("Pick: ");
     screen.print(pick);
     screen.print("\nPool: ");
-    screen.print(String(pool));
-  }
+    screen.print(formatPick(pool));
+    screen.print("\Max: ");
+    screen.print(formatPick(upperBound));
 
+    screen.display(time);
+  }
+  
   pool++;
   if (pool > upperBound) {
     pool = 0;
