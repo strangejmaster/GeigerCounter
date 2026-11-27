@@ -6,9 +6,17 @@
 
 // RX on 18, TX on 19
 // SoftwareSerial GeigerSerial = SoftwareSerial(18, 19);
+// Button Controls
+// Time in milliseconds that the button must be held for for the following events to occur
+// Multiple events are not triggered even if the time is above the minimum heldTime for more than one event
+const int secondaryActionTime{2000}; // If button is released while time < secondaryActionTime, primary action occurs
+const int modeSwitchTime{4000};
 
 const int buttonPin{ 4 };
 Button button(buttonPin);
+unsigned long lastHeldTime{0}; // How long the button had been held for, since the last loop
+
+
 
 // Digital pin for reading a single ionization event from the Geiger Counter
 const int pulsePin{ 8 };
@@ -75,7 +83,7 @@ void setup() {
 void loop() {
   unsigned long time{ millis() };
 
-  if (button.pressed_for(2000)) {
+  if (button.pressed_for(modeSwitchTime)) {
     if (!modeSwitched) {
       activeMode++;
 
@@ -96,13 +104,29 @@ void loop() {
   // Serial.println(activeMode);
   
   if (modes[activeMode] != nullptr) {
-    // TODO: Add a way to trigger the secondaryAction (possibly a short hold of the button)
-    modes[activeMode]->tick(pulses, time, button.released(), false);
+    bool primaryAction{false};
+    bool secondaryAction{false};
 
+    if (button.released()) {
+      if (lastHeldTime >= modeSwitchTime) {
+        // Nothing
+      } else if (lastHeldTime >= secondaryActionTime) {
+        secondaryAction = true;
+      } else {
+        primaryAction = true;
+      }
+      primaryAction = true;
+    }
+
+    // TODO: Add a way to trigger the secondaryAction (possibly a short hold of the button)
+    modes[activeMode]->tick(pulses, time, primaryAction, secondaryAction);
+    
     pulses = 0;
   } else {
     // Serial.println("Nullptr!!!");
   }
+
+  lastHeldTime = button.held_time();
 
   // Check for stale input
   // if (input == "") {
