@@ -59,26 +59,32 @@ void TestMode::tick(int clicks, unsigned long time) {
 }
 
 
+void RandomMode::setup(unsigned long time) {
+  screen.reset();
+  screen.print("Loading\nRandom");
+  screen.display(time);
+}
 
+void RandomMode::tick(int clicks, unsigned long time) {
+  // TODO - IMPORTANT: Convert all of the time comparisons to use subtraction so they can can continue to function during the ~40-day time overflow
+  if (time > (lastPickTime + minimumPickDelay)) {
+    if (clicks > 0) {
+      pick = String(pool);
 
-// FOR RandomMode
-  // if (displayWritable(time, lastDisplayTime, displayDelay)) {
-  //   display.clearDisplay();
-  //   if (displayMode == 0) {
-  //     displayGeiger(display, cps, cpm, mode);
-  //   } else if (displayMode == 1) {
-  //     displayRandom(display, cps, randomCounter, randomCounterStore, oldCps);
-  //   }
-  // }
+      lastPickTime = time;
+    }
+  }
 
-  // if (time - randomCounterSetTime > randomCounterHoldTime) {
-  //   if (cps > oldCps) {
-  //     randomCounterSetTime = time;
-  //     randomCounterStore = randomCounter;
-  //   }
-  //   randomCounterStore = randomCounter;
-  // }
-  // randomCounter++;
-  // if (randomCounter > 9) {
-  //   randomCounter = 0;
-  // }
+  if (screen.displayable(time)) {
+    screen.reset();
+    screen.print("Pick: ");
+    screen.print(pick);
+    screen.print("\nPool: ");
+    screen.print(String(pool));
+  }
+
+  pool++;
+  if (pool > upperBound) {
+    pool = 0;
+  }
+}

@@ -62,7 +62,7 @@ void setup() {
 
   // Initialize all of the modes
   modes[0] = new TestMode(screen, Serial, Serial1);
-  modes[1] = new TestMode(screen, Serial, Serial1);
+  modes[1] = new RandomMode(screen, Serial);
 
   screen.playIntro();
 
@@ -97,6 +97,8 @@ void loop() {
   
   if (modes[activeMode] != nullptr) {
     modes[activeMode]->tick(pulses, time);
+
+    pulses = 0;
   } else {
     // Serial.println("Nullptr!!!");
   }

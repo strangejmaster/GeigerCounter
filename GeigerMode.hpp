@@ -76,6 +76,28 @@ class TestMode : public GeigerMode {
     void tick(int clicks, unsigned long time) override;
 };
 
+class RandomMode : public GeigerMode {
+  private:
+    // The value that is continuously updated. One pick is drawn from the pool as decided by the Geiger Counter
+    int pool{0};
+
+    String pick{"None"};
+
+    // The highest value allowed, inclusive
+    int upperBound{9};
+
+    unsigned long lastPickTime{0};
+
+    // Minimum time in milliseconds between each number picked
+    const unsigned int minimumPickDelay{750};
+
+  public: 
+    RandomMode(ScreenManager& screen, Stream& debugSerial) : GeigerMode(screen, debugSerial) {};
+    
+    void setup(unsigned long time);
+    void tick(int clicks, unsigned long time);
+};
+
 // // Detect if a click should exist (impulses are sent by the Attiny2313 on the board and last 100 uS)
 // A 3 MICROsecond debounce to wait before the next pulse is detected
     // const int debounce{3};
