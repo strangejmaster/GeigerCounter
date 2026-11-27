@@ -49,7 +49,7 @@ void ScreenManager::playIntro() {
   for (int radius{0}; radius < targetRadius; radius += 1) {
     screen.drawCircle(screen.width() / 2, screen.height() / 2, radius, SSD1306_WHITE);
     screen.display();
-    delay(2);
+    delay(1);
   }
   delay(50);
   
