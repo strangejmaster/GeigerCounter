@@ -53,3 +53,26 @@ void TestMode::tick(int clicks, unsigned long time) {
 }
 
 
+
+
+// FOR RandomMode
+  // if (displayWritable(time, lastDisplayTime, displayDelay)) {
+  //   display.clearDisplay();
+  //   if (displayMode == 0) {
+  //     displayGeiger(display, cps, cpm, mode);
+  //   } else if (displayMode == 1) {
+  //     displayRandom(display, cps, randomCounter, randomCounterStore, oldCps);
+  //   }
+  // }
+
+  // if (time - randomCounterSetTime > randomCounterHoldTime) {
+  //   if (cps > oldCps) {
+  //     randomCounterSetTime = time;
+  //     randomCounterStore = randomCounter;
+  //   }
+  //   randomCounterStore = randomCounter;
+  // }
+  // randomCounter++;
+  // if (randomCounter > 9) {
+  //   randomCounter = 0;
+  // }
