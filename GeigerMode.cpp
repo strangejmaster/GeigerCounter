@@ -79,7 +79,7 @@ void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool s
       upperBound = 20;
       formatPick = [](int pick) -> String { return String(pick); };
     } else if (state == 2) {
-      upperBound = 26;
+      upperBound = 25;
       formatPick = [](int pick) -> String { return String((char) (65 + pick)); };
     }
   }
@@ -98,7 +98,7 @@ void RandomMode::tick(int clicks, unsigned long time, bool primaryAction, bool s
     screen.print(pick);
     screen.print("\nPool: ");
     screen.print(formatPick(pool));
-    screen.print("\Max: ");
+    screen.print("\nMax: ");
     screen.print(formatPick(upperBound));
 
     screen.display(time);
